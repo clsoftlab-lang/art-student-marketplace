@@ -1,0 +1,1262 @@
+[
+  {
+    "id": "art-001",
+    "title": "붉은 오후 No.5",
+    "artistId": "artist-01",
+    "genre": "조소",
+    "medium": "브론즈",
+    "year": 2025,
+    "widthCm": 32,
+    "heightCm": 32,
+    "sizeClass": "small",
+    "price": 1130000,
+    "forRent": true,
+    "rentPricePerMonth": 48000,
+    "paletteName": "아이보리 모노",
+    "colorTag": "monochrome",
+    "colors": [
+      "#2B2B2B",
+      "#6E6E6E",
+      "#B8B4AC",
+      "#EDEAE3"
+    ],
+    "composition": "flow",
+    "seed": 1000,
+    "artistNote": "손의 흔적과 우연한 번짐을 남겨 둔 작업입니다. 가까이에서 볼수록 질감이 드러납니다.",
+    "tags": [
+      "조소",
+      "monochrome",
+      "small"
+    ]
+  },
+  {
+    "id": "art-002",
+    "title": "붉은 숨 No.2",
+    "artistId": "artist-02",
+    "genre": "판화",
+    "medium": "목판화",
+    "year": 2025,
+    "widthCm": 71,
+    "heightCm": 120,
+    "sizeClass": "large",
+    "price": 6010000,
+    "forRent": false,
+    "rentPricePerMonth": 0,
+    "paletteName": "파스텔 로즈",
+    "colorTag": "pastel",
+    "colors": [
+      "#F7CAD0",
+      "#F9BEC7",
+      "#FAE1DD",
+      "#E8A0BF"
+    ],
+    "composition": "orbits",
+    "seed": 1037,
+    "artistNote": "전시 종료 후 폐기 대신 새 주인을 찾습니다. 작은 공간에도 부담 없이 걸 수 있는 크기입니다.",
+    "tags": [
+      "판화",
+      "pastel",
+      "large"
+    ]
+  },
+  {
+    "id": "art-003",
+    "title": "남겨진 정원 III",
+    "artistId": "artist-03",
+    "genre": "판화",
+    "medium": "에칭 (동판)",
+    "year": 2023,
+    "widthCm": 97,
+    "heightCm": 76,
+    "sizeClass": "large",
+    "price": 5300000,
+    "forRent": true,
+    "rentPricePerMonth": 162000,
+    "paletteName": "딥 오션",
+    "colorTag": "cool",
+    "colors": [
+      "#264653",
+      "#2A9D8F",
+      "#8AB6C4",
+      "#123040"
+    ],
+    "composition": "flow",
+    "seed": 1074,
+    "artistNote": "손의 흔적과 우연한 번짐을 남겨 둔 작업입니다. 가까이에서 볼수록 질감이 드러납니다.",
+    "tags": [
+      "판화",
+      "cool",
+      "large"
+    ]
+  },
+  {
+    "id": "art-004",
+    "title": "가벼운 거리 III",
+    "artistId": "artist-04",
+    "genre": "조소",
+    "medium": "테라코타",
+    "year": 2023,
+    "widthCm": 48,
+    "heightCm": 59,
+    "sizeClass": "medium",
+    "price": 2730000,
+    "forRent": true,
+    "rentPricePerMonth": 100000,
+    "paletteName": "올리브 우드",
+    "colorTag": "earth",
+    "colors": [
+      "#6B705C",
+      "#A5A58D",
+      "#CB997E",
+      "#B7B7A4"
+    ],
+    "composition": "strata",
+    "seed": 1111,
+    "artistNote": "전시 종료 후 폐기 대신 새 주인을 찾습니다. 작은 공간에도 부담 없이 걸 수 있는 크기입니다.",
+    "tags": [
+      "조소",
+      "earth",
+      "medium"
+    ]
+  },
+  {
+    "id": "art-005",
+    "title": "무명의 언덕 III",
+    "artistId": "artist-05",
+    "genre": "일러스트",
+    "medium": "디지털 프린트 (한정 에디션)",
+    "year": 2023,
+    "widthCm": 36,
+    "heightCm": 120,
+    "sizeClass": "large",
+    "price": 3120000,
+    "forRent": true,
+    "rentPricePerMonth": 137000,
+    "paletteName": "차콜 모노",
+    "colorTag": "monochrome",
+    "colors": [
+      "#1B1B1E",
+      "#3F3F46",
+      "#7A7A82",
+      "#C9C9CE"
+    ],
+    "composition": "grid",
+    "seed": 1148,
+    "artistNote": "grid 구조를 바탕으로 화면의 균형을 실험했습니다. 카페나 사무실의 넓은 벽면에 잘 어울립니다.",
+    "tags": [
+      "일러스트",
+      "monochrome",
+      "large"
+    ]
+  },
+  {
+    "id": "art-006",
+    "title": "가벼운 균형",
+    "artistId": "artist-06",
+    "genre": "조소",
+    "medium": "브론즈",
+    "year": 2025,
+    "widthCm": 58,
+    "heightCm": 60,
+    "sizeClass": "medium",
+    "price": 3390000,
+    "forRent": true,
+    "rentPricePerMonth": 165000,
+    "paletteName": "파스텔 로즈",
+    "colorTag": "pastel",
+    "colors": [
+      "#F7CAD0",
+      "#F9BEC7",
+      "#FAE1DD",
+      "#E8A0BF"
+    ],
+    "composition": "flow",
+    "seed": 1185,
+    "artistNote": "flow 구조를 바탕으로 화면의 균형을 실험했습니다. 카페나 사무실의 넓은 벽면에 잘 어울립니다.",
+    "tags": [
+      "조소",
+      "pastel",
+      "medium"
+    ]
+  },
+  {
+    "id": "art-007",
+    "title": "가까운 정원 No.2",
+    "artistId": "artist-07",
+    "genre": "일러스트",
+    "medium": "종이에 수채",
+    "year": 2023,
+    "widthCm": 75,
+    "heightCm": 82,
+    "sizeClass": "large",
+    "price": 4400000,
+    "forRent": false,
+    "rentPricePerMonth": 0,
+    "paletteName": "테라코타",
+    "colorTag": "warm",
+    "colors": [
+      "#C1502E",
+      "#E9C46A",
+      "#D98C5F",
+      "#7A3B2E"
+    ],
+    "composition": "strata",
+    "seed": 1222,
+    "artistNote": "strata 구조를 바탕으로 화면의 균형을 실험했습니다. 카페나 사무실의 넓은 벽면에 잘 어울립니다.",
+    "tags": [
+      "일러스트",
+      "warm",
+      "large"
+    ]
+  },
+  {
+    "id": "art-008",
+    "title": "희미한 해안",
+    "artistId": "artist-08",
+    "genre": "판화",
+    "medium": "에칭 (동판)",
+    "year": 2024,
+    "widthCm": 60,
+    "heightCm": 38,
+    "sizeClass": "medium",
+    "price": 1740000,
+    "forRent": false,
+    "rentPricePerMonth": 0,
+    "paletteName": "라벤더 미스트",
+    "colorTag": "pastel",
+    "colors": [
+      "#CDB4DB",
+      "#E0C3FC",
+      "#BDB2FF",
+      "#A2A0E8"
+    ],
+    "composition": "shards",
+    "seed": 1259,
+    "artistNote": "shards 구조를 바탕으로 화면의 균형을 실험했습니다. 카페나 사무실의 넓은 벽면에 잘 어울립니다.",
+    "tags": [
+      "판화",
+      "pastel",
+      "medium"
+    ]
+  },
+  {
+    "id": "art-009",
+    "title": "희미한 숨 No.5",
+    "artistId": "artist-09",
+    "genre": "판화",
+    "medium": "리놀륨 판화",
+    "year": 2025,
+    "widthCm": 109,
+    "heightCm": 36,
+    "sizeClass": "large",
+    "price": 2830000,
+    "forRent": true,
+    "rentPricePerMonth": 95000,
+    "paletteName": "어스 클레이",
+    "colorTag": "earth",
+    "colors": [
+      "#8A5A44",
+      "#A47148",
+      "#D6BFA9",
+      "#5C4433"
+    ],
+    "composition": "flow",
+    "seed": 1296,
+    "artistNote": "전시 종료 후 폐기 대신 새 주인을 찾습니다. 작은 공간에도 부담 없이 걸 수 있는 크기입니다.",
+    "tags": [
+      "판화",
+      "earth",
+      "large"
+    ]
+  },
+  {
+    "id": "art-010",
+    "title": "어느 해안 (미완)",
+    "artistId": "artist-10",
+    "genre": "조소",
+    "medium": "브론즈",
+    "year": 2023,
+    "widthCm": 25,
+    "heightCm": 45,
+    "sizeClass": "medium",
+    "price": 1150000,
+    "forRent": false,
+    "rentPricePerMonth": 0,
+    "paletteName": "올리브 우드",
+    "colorTag": "earth",
+    "colors": [
+      "#6B705C",
+      "#A5A58D",
+      "#CB997E",
+      "#B7B7A4"
+    ],
+    "composition": "shards",
+    "seed": 1333,
+    "artistNote": "전시 종료 후 폐기 대신 새 주인을 찾습니다. 작은 공간에도 부담 없이 걸 수 있는 크기입니다.",
+    "tags": [
+      "조소",
+      "earth",
+      "medium"
+    ]
+  },
+  {
+    "id": "art-011",
+    "title": "무명의 파동 II",
+    "artistId": "artist-11",
+    "genre": "회화",
+    "medium": "패널에 유채",
+    "year": 2023,
+    "widthCm": 102,
+    "heightCm": 107,
+    "sizeClass": "large",
+    "price": 7720000,
+    "forRent": false,
+    "rentPricePerMonth": 0,
+    "paletteName": "민트 크림",
+    "colorTag": "pastel",
+    "colors": [
+      "#C7F0DB",
+      "#A8E6CF",
+      "#DCEDC1",
+      "#B5EAD7"
+    ],
+    "composition": "fields",
+    "seed": 1370,
+    "artistNote": "전시 종료 후 폐기 대신 새 주인을 찾습니다. 작은 공간에도 부담 없이 걸 수 있는 크기입니다.",
+    "tags": [
+      "회화",
+      "pastel",
+      "large"
+    ]
+  },
+  {
+    "id": "art-012",
+    "title": "무명의 거리 — 연작",
+    "artistId": "artist-12",
+    "genre": "일러스트",
+    "medium": "종이에 색연필",
+    "year": 2024,
+    "widthCm": 50,
+    "heightCm": 37,
+    "sizeClass": "medium",
+    "price": 1370000,
+    "forRent": false,
+    "rentPricePerMonth": 0,
+    "paletteName": "선셋 앰버",
+    "colorTag": "warm",
+    "colors": [
+      "#F4A259",
+      "#E76F51",
+      "#F7C59F",
+      "#8C3B2B"
+    ],
+    "composition": "orbits",
+    "seed": 1407,
+    "artistNote": "orbits 구조를 바탕으로 화면의 균형을 실험했습니다. 카페나 사무실의 넓은 벽면에 잘 어울립니다.",
+    "tags": [
+      "일러스트",
+      "warm",
+      "medium"
+    ]
+  },
+  {
+    "id": "art-013",
+    "title": "어느 거리 No.5",
+    "artistId": "artist-01",
+    "genre": "조소",
+    "medium": "브론즈",
+    "year": 2025,
+    "widthCm": 53,
+    "heightCm": 70,
+    "sizeClass": "medium",
+    "price": 3420000,
+    "forRent": false,
+    "rentPricePerMonth": 0,
+    "paletteName": "선셋 앰버",
+    "colorTag": "warm",
+    "colors": [
+      "#F4A259",
+      "#E76F51",
+      "#F7C59F",
+      "#8C3B2B"
+    ],
+    "composition": "shards",
+    "seed": 1444,
+    "artistNote": "졸업 전시 이후 작업실에 보관하던 작품입니다. 선셋 앰버 계열의 조소 작업으로, 자연광 아래에서 색이 가장 살아납니다.",
+    "tags": [
+      "조소",
+      "warm",
+      "medium"
+    ]
+  },
+  {
+    "id": "art-014",
+    "title": "남겨진 기억 No.5",
+    "artistId": "artist-02",
+    "genre": "판화",
+    "medium": "목판화",
+    "year": 2023,
+    "widthCm": 111,
+    "heightCm": 71,
+    "sizeClass": "large",
+    "price": 5650000,
+    "forRent": true,
+    "rentPricePerMonth": 244000,
+    "paletteName": "테라코타",
+    "colorTag": "warm",
+    "colors": [
+      "#C1502E",
+      "#E9C46A",
+      "#D98C5F",
+      "#7A3B2E"
+    ],
+    "composition": "shards",
+    "seed": 1481,
+    "artistNote": "손의 흔적과 우연한 번짐을 남겨 둔 작업입니다. 가까이에서 볼수록 질감이 드러납니다.",
+    "tags": [
+      "판화",
+      "warm",
+      "large"
+    ]
+  },
+  {
+    "id": "art-015",
+    "title": "깊은 언덕",
+    "artistId": "artist-03",
+    "genre": "회화",
+    "medium": "캔버스에 아크릴",
+    "year": 2023,
+    "widthCm": 111,
+    "heightCm": 65,
+    "sizeClass": "large",
+    "price": 5250000,
+    "forRent": true,
+    "rentPricePerMonth": 251000,
+    "paletteName": "비비드 팝",
+    "colorTag": "vivid",
+    "colors": [
+      "#FF006E",
+      "#FB5607",
+      "#FFBE0B",
+      "#3A86FF"
+    ],
+    "composition": "fields",
+    "seed": 1518,
+    "artistNote": "전시 종료 후 폐기 대신 새 주인을 찾습니다. 작은 공간에도 부담 없이 걸 수 있는 크기입니다.",
+    "tags": [
+      "회화",
+      "vivid",
+      "large"
+    ]
+  },
+  {
+    "id": "art-016",
+    "title": "남겨진 균형",
+    "artistId": "artist-04",
+    "genre": "회화",
+    "medium": "캔버스에 혼합재료",
+    "year": 2024,
+    "widthCm": 63,
+    "heightCm": 123,
+    "sizeClass": "large",
+    "price": 5660000,
+    "forRent": true,
+    "rentPricePerMonth": 173000,
+    "paletteName": "비비드 팝",
+    "colorTag": "vivid",
+    "colors": [
+      "#FF006E",
+      "#FB5607",
+      "#FFBE0B",
+      "#3A86FF"
+    ],
+    "composition": "shards",
+    "seed": 1555,
+    "artistNote": "졸업 전시 이후 작업실에 보관하던 작품입니다. 비비드 팝 계열의 회화 작업으로, 자연광 아래에서 색이 가장 살아납니다.",
+    "tags": [
+      "회화",
+      "vivid",
+      "large"
+    ]
+  },
+  {
+    "id": "art-017",
+    "title": "깊은 언덕",
+    "artistId": "artist-05",
+    "genre": "일러스트",
+    "medium": "종이에 수채",
+    "year": 2024,
+    "widthCm": 89,
+    "heightCm": 83,
+    "sizeClass": "large",
+    "price": 5280000,
+    "forRent": true,
+    "rentPricePerMonth": 167000,
+    "paletteName": "딥 오션",
+    "colorTag": "cool",
+    "colors": [
+      "#264653",
+      "#2A9D8F",
+      "#8AB6C4",
+      "#123040"
+    ],
+    "composition": "grid",
+    "seed": 1592,
+    "artistNote": "grid 구조를 바탕으로 화면의 균형을 실험했습니다. 카페나 사무실의 넓은 벽면에 잘 어울립니다.",
+    "tags": [
+      "일러스트",
+      "cool",
+      "large"
+    ]
+  },
+  {
+    "id": "art-018",
+    "title": "무명의 초상 No.5",
+    "artistId": "artist-06",
+    "genre": "조소",
+    "medium": "스테인리스 스틸",
+    "year": 2023,
+    "widthCm": 51,
+    "heightCm": 33,
+    "sizeClass": "medium",
+    "price": 1730000,
+    "forRent": false,
+    "rentPricePerMonth": 0,
+    "paletteName": "딥 오션",
+    "colorTag": "cool",
+    "colors": [
+      "#264653",
+      "#2A9D8F",
+      "#8AB6C4",
+      "#123040"
+    ],
+    "composition": "grid",
+    "seed": 1629,
+    "artistNote": "전시 종료 후 폐기 대신 새 주인을 찾습니다. 작은 공간에도 부담 없이 걸 수 있는 크기입니다.",
+    "tags": [
+      "조소",
+      "cool",
+      "medium"
+    ]
+  },
+  {
+    "id": "art-019",
+    "title": "어느 파동 — 연작",
+    "artistId": "artist-07",
+    "genre": "판화",
+    "medium": "목판화",
+    "year": 2024,
+    "widthCm": 109,
+    "heightCm": 40,
+    "sizeClass": "large",
+    "price": 3270000,
+    "forRent": false,
+    "rentPricePerMonth": 0,
+    "paletteName": "테라코타",
+    "colorTag": "warm",
+    "colors": [
+      "#C1502E",
+      "#E9C46A",
+      "#D98C5F",
+      "#7A3B2E"
+    ],
+    "composition": "shards",
+    "seed": 1666,
+    "artistNote": "shards 구조를 바탕으로 화면의 균형을 실험했습니다. 카페나 사무실의 넓은 벽면에 잘 어울립니다.",
+    "tags": [
+      "판화",
+      "warm",
+      "large"
+    ]
+  },
+  {
+    "id": "art-020",
+    "title": "가까운 오후 No.5",
+    "artistId": "artist-08",
+    "genre": "일러스트",
+    "medium": "종이에 색연필",
+    "year": 2023,
+    "widthCm": 96,
+    "heightCm": 116,
+    "sizeClass": "large",
+    "price": 8040000,
+    "forRent": true,
+    "rentPricePerMonth": 289000,
+    "paletteName": "일렉트릭",
+    "colorTag": "vivid",
+    "colors": [
+      "#8338EC",
+      "#3A86FF",
+      "#FF006E",
+      "#06D6A0"
+    ],
+    "composition": "fields",
+    "seed": 1703,
+    "artistNote": "졸업 전시 이후 작업실에 보관하던 작품입니다. 일렉트릭 계열의 일러스트 작업으로, 자연광 아래에서 색이 가장 살아납니다.",
+    "tags": [
+      "일러스트",
+      "vivid",
+      "large"
+    ]
+  },
+  {
+    "id": "art-021",
+    "title": "남겨진 빛 No.5",
+    "artistId": "artist-09",
+    "genre": "조소",
+    "medium": "레진 혼합",
+    "year": 2025,
+    "widthCm": 51,
+    "heightCm": 30,
+    "sizeClass": "medium",
+    "price": 1490000,
+    "forRent": true,
+    "rentPricePerMonth": 69000,
+    "paletteName": "올리브 우드",
+    "colorTag": "earth",
+    "colors": [
+      "#6B705C",
+      "#A5A58D",
+      "#CB997E",
+      "#B7B7A4"
+    ],
+    "composition": "orbits",
+    "seed": 1740,
+    "artistNote": "손의 흔적과 우연한 번짐을 남겨 둔 작업입니다. 가까이에서 볼수록 질감이 드러납니다.",
+    "tags": [
+      "조소",
+      "earth",
+      "medium"
+    ]
+  },
+  {
+    "id": "art-022",
+    "title": "희미한 거리 No.5",
+    "artistId": "artist-10",
+    "genre": "일러스트",
+    "medium": "디지털 프린트 (한정 에디션)",
+    "year": 2023,
+    "widthCm": 69,
+    "heightCm": 98,
+    "sizeClass": "large",
+    "price": 4990000,
+    "forRent": false,
+    "rentPricePerMonth": 0,
+    "paletteName": "미드나잇 블루",
+    "colorTag": "cool",
+    "colors": [
+      "#22334D",
+      "#3E5C76",
+      "#748CAB",
+      "#0D1B2A"
+    ],
+    "composition": "flow",
+    "seed": 1777,
+    "artistNote": "flow 구조를 바탕으로 화면의 균형을 실험했습니다. 카페나 사무실의 넓은 벽면에 잘 어울립니다.",
+    "tags": [
+      "일러스트",
+      "cool",
+      "large"
+    ]
+  },
+  {
+    "id": "art-023",
+    "title": "푸른 파동 (미완)",
+    "artistId": "artist-11",
+    "genre": "일러스트",
+    "medium": "종이에 과슈",
+    "year": 2023,
+    "widthCm": 95,
+    "heightCm": 120,
+    "sizeClass": "large",
+    "price": 8230000,
+    "forRent": true,
+    "rentPricePerMonth": 266000,
+    "paletteName": "딥 오션",
+    "colorTag": "cool",
+    "colors": [
+      "#264653",
+      "#2A9D8F",
+      "#8AB6C4",
+      "#123040"
+    ],
+    "composition": "shards",
+    "seed": 1814,
+    "artistNote": "shards 구조를 바탕으로 화면의 균형을 실험했습니다. 카페나 사무실의 넓은 벽면에 잘 어울립니다.",
+    "tags": [
+      "일러스트",
+      "cool",
+      "large"
+    ]
+  },
+  {
+    "id": "art-024",
+    "title": "깊은 숨 II",
+    "artistId": "artist-12",
+    "genre": "회화",
+    "medium": "캔버스에 혼합재료",
+    "year": 2024,
+    "widthCm": 92,
+    "heightCm": 105,
+    "sizeClass": "large",
+    "price": 6970000,
+    "forRent": true,
+    "rentPricePerMonth": 266000,
+    "paletteName": "미드나잇 블루",
+    "colorTag": "cool",
+    "colors": [
+      "#22334D",
+      "#3E5C76",
+      "#748CAB",
+      "#0D1B2A"
+    ],
+    "composition": "shards",
+    "seed": 1851,
+    "artistNote": "shards 구조를 바탕으로 화면의 균형을 실험했습니다. 카페나 사무실의 넓은 벽면에 잘 어울립니다.",
+    "tags": [
+      "회화",
+      "cool",
+      "large"
+    ]
+  },
+  {
+    "id": "art-025",
+    "title": "느린 오후 II",
+    "artistId": "artist-01",
+    "genre": "조소",
+    "medium": "레진 혼합",
+    "year": 2023,
+    "widthCm": 40,
+    "heightCm": 25,
+    "sizeClass": "medium",
+    "price": 1090000,
+    "forRent": true,
+    "rentPricePerMonth": 39000,
+    "paletteName": "딥 오션",
+    "colorTag": "cool",
+    "colors": [
+      "#264653",
+      "#2A9D8F",
+      "#8AB6C4",
+      "#123040"
+    ],
+    "composition": "orbits",
+    "seed": 1888,
+    "artistNote": "전시 종료 후 폐기 대신 새 주인을 찾습니다. 작은 공간에도 부담 없이 걸 수 있는 크기입니다.",
+    "tags": [
+      "조소",
+      "cool",
+      "medium"
+    ]
+  },
+  {
+    "id": "art-026",
+    "title": "가벼운 언덕 II",
+    "artistId": "artist-02",
+    "genre": "일러스트",
+    "medium": "디지털 프린트 (한정 에디션)",
+    "year": 2023,
+    "widthCm": 37,
+    "heightCm": 66,
+    "sizeClass": "medium",
+    "price": 1840000,
+    "forRent": true,
+    "rentPricePerMonth": 56000,
+    "paletteName": "차콜 모노",
+    "colorTag": "monochrome",
+    "colors": [
+      "#1B1B1E",
+      "#3F3F46",
+      "#7A7A82",
+      "#C9C9CE"
+    ],
+    "composition": "shards",
+    "seed": 1925,
+    "artistNote": "손의 흔적과 우연한 번짐을 남겨 둔 작업입니다. 가까이에서 볼수록 질감이 드러납니다.",
+    "tags": [
+      "일러스트",
+      "monochrome",
+      "medium"
+    ]
+  },
+  {
+    "id": "art-027",
+    "title": "깊은 파동 III",
+    "artistId": "artist-03",
+    "genre": "회화",
+    "medium": "캔버스에 혼합재료",
+    "year": 2024,
+    "widthCm": 77,
+    "heightCm": 55,
+    "sizeClass": "medium",
+    "price": 3060000,
+    "forRent": false,
+    "rentPricePerMonth": 0,
+    "paletteName": "테라코타",
+    "colorTag": "warm",
+    "colors": [
+      "#C1502E",
+      "#E9C46A",
+      "#D98C5F",
+      "#7A3B2E"
+    ],
+    "composition": "grid",
+    "seed": 1962,
+    "artistNote": "졸업 전시 이후 작업실에 보관하던 작품입니다. 테라코타 계열의 회화 작업으로, 자연광 아래에서 색이 가장 살아납니다.",
+    "tags": [
+      "회화",
+      "warm",
+      "medium"
+    ]
+  },
+  {
+    "id": "art-028",
+    "title": "어느 해안 No.2",
+    "artistId": "artist-04",
+    "genre": "일러스트",
+    "medium": "디지털 프린트 (한정 에디션)",
+    "year": 2025,
+    "widthCm": 46,
+    "heightCm": 100,
+    "sizeClass": "large",
+    "price": 3350000,
+    "forRent": true,
+    "rentPricePerMonth": 125000,
+    "paletteName": "미드나잇 블루",
+    "colorTag": "cool",
+    "colors": [
+      "#22334D",
+      "#3E5C76",
+      "#748CAB",
+      "#0D1B2A"
+    ],
+    "composition": "shards",
+    "seed": 1999,
+    "artistNote": "shards 구조를 바탕으로 화면의 균형을 실험했습니다. 카페나 사무실의 넓은 벽면에 잘 어울립니다.",
+    "tags": [
+      "일러스트",
+      "cool",
+      "large"
+    ]
+  },
+  {
+    "id": "art-029",
+    "title": "가까운 파동 III",
+    "artistId": "artist-05",
+    "genre": "판화",
+    "medium": "실크스크린",
+    "year": 2024,
+    "widthCm": 52,
+    "heightCm": 122,
+    "sizeClass": "large",
+    "price": 4660000,
+    "forRent": true,
+    "rentPricePerMonth": 181000,
+    "paletteName": "비비드 팝",
+    "colorTag": "vivid",
+    "colors": [
+      "#FF006E",
+      "#FB5607",
+      "#FFBE0B",
+      "#3A86FF"
+    ],
+    "composition": "grid",
+    "seed": 2036,
+    "artistNote": "전시 종료 후 폐기 대신 새 주인을 찾습니다. 작은 공간에도 부담 없이 걸 수 있는 크기입니다.",
+    "tags": [
+      "판화",
+      "vivid",
+      "large"
+    ]
+  },
+  {
+    "id": "art-030",
+    "title": "깊은 언덕 III",
+    "artistId": "artist-06",
+    "genre": "회화",
+    "medium": "패널에 유채",
+    "year": 2023,
+    "widthCm": 80,
+    "heightCm": 75,
+    "sizeClass": "medium",
+    "price": 4260000,
+    "forRent": true,
+    "rentPricePerMonth": 205000,
+    "paletteName": "파스텔 로즈",
+    "colorTag": "pastel",
+    "colors": [
+      "#F7CAD0",
+      "#F9BEC7",
+      "#FAE1DD",
+      "#E8A0BF"
+    ],
+    "composition": "shards",
+    "seed": 2073,
+    "artistNote": "손의 흔적과 우연한 번짐을 남겨 둔 작업입니다. 가까이에서 볼수록 질감이 드러납니다.",
+    "tags": [
+      "회화",
+      "pastel",
+      "medium"
+    ]
+  },
+  {
+    "id": "art-031",
+    "title": "깊은 해안 No.5",
+    "artistId": "artist-07",
+    "genre": "조소",
+    "medium": "테라코타",
+    "year": 2024,
+    "widthCm": 59,
+    "heightCm": 66,
+    "sizeClass": "medium",
+    "price": 3630000,
+    "forRent": true,
+    "rentPricePerMonth": 155000,
+    "paletteName": "파스텔 로즈",
+    "colorTag": "pastel",
+    "colors": [
+      "#F7CAD0",
+      "#F9BEC7",
+      "#FAE1DD",
+      "#E8A0BF"
+    ],
+    "composition": "shards",
+    "seed": 2110,
+    "artistNote": "졸업 전시 이후 작업실에 보관하던 작품입니다. 파스텔 로즈 계열의 조소 작업으로, 자연광 아래에서 색이 가장 살아납니다.",
+    "tags": [
+      "조소",
+      "pastel",
+      "medium"
+    ]
+  },
+  {
+    "id": "art-032",
+    "title": "어느 리듬 (미완)",
+    "artistId": "artist-08",
+    "genre": "판화",
+    "medium": "실크스크린",
+    "year": 2023,
+    "widthCm": 103,
+    "heightCm": 129,
+    "sizeClass": "large",
+    "price": 9480000,
+    "forRent": false,
+    "rentPricePerMonth": 0,
+    "paletteName": "파스텔 로즈",
+    "colorTag": "pastel",
+    "colors": [
+      "#F7CAD0",
+      "#F9BEC7",
+      "#FAE1DD",
+      "#E8A0BF"
+    ],
+    "composition": "grid",
+    "seed": 2147,
+    "artistNote": "손의 흔적과 우연한 번짐을 남겨 둔 작업입니다. 가까이에서 볼수록 질감이 드러납니다.",
+    "tags": [
+      "판화",
+      "pastel",
+      "large"
+    ]
+  },
+  {
+    "id": "art-033",
+    "title": "무명의 방 No.5",
+    "artistId": "artist-09",
+    "genre": "판화",
+    "medium": "실크스크린",
+    "year": 2024,
+    "widthCm": 87,
+    "heightCm": 45,
+    "sizeClass": "large",
+    "price": 2790000,
+    "forRent": false,
+    "rentPricePerMonth": 0,
+    "paletteName": "딥 오션",
+    "colorTag": "cool",
+    "colors": [
+      "#264653",
+      "#2A9D8F",
+      "#8AB6C4",
+      "#123040"
+    ],
+    "composition": "grid",
+    "seed": 2184,
+    "artistNote": "grid 구조를 바탕으로 화면의 균형을 실험했습니다. 카페나 사무실의 넓은 벽면에 잘 어울립니다.",
+    "tags": [
+      "판화",
+      "cool",
+      "large"
+    ]
+  },
+  {
+    "id": "art-034",
+    "title": "붉은 해안 (미완)",
+    "artistId": "artist-10",
+    "genre": "일러스트",
+    "medium": "종이에 수채",
+    "year": 2024,
+    "widthCm": 130,
+    "heightCm": 53,
+    "sizeClass": "large",
+    "price": 4890000,
+    "forRent": true,
+    "rentPricePerMonth": 201000,
+    "paletteName": "세이지 그린",
+    "colorTag": "cool",
+    "colors": [
+      "#7C9885",
+      "#B5C99A",
+      "#5E7358",
+      "#DDE5B6"
+    ],
+    "composition": "flow",
+    "seed": 2221,
+    "artistNote": "flow 구조를 바탕으로 화면의 균형을 실험했습니다. 카페나 사무실의 넓은 벽면에 잘 어울립니다.",
+    "tags": [
+      "일러스트",
+      "cool",
+      "large"
+    ]
+  },
+  {
+    "id": "art-035",
+    "title": "푸른 숨 (미완)",
+    "artistId": "artist-11",
+    "genre": "회화",
+    "medium": "패널에 유채",
+    "year": 2025,
+    "widthCm": 90,
+    "heightCm": 34,
+    "sizeClass": "large",
+    "price": 2390000,
+    "forRent": true,
+    "rentPricePerMonth": 96000,
+    "paletteName": "일렉트릭",
+    "colorTag": "vivid",
+    "colors": [
+      "#8338EC",
+      "#3A86FF",
+      "#FF006E",
+      "#06D6A0"
+    ],
+    "composition": "grid",
+    "seed": 2258,
+    "artistNote": "grid 구조를 바탕으로 화면의 균형을 실험했습니다. 카페나 사무실의 넓은 벽면에 잘 어울립니다.",
+    "tags": [
+      "회화",
+      "vivid",
+      "large"
+    ]
+  },
+  {
+    "id": "art-036",
+    "title": "흐르는 기억 III",
+    "artistId": "artist-12",
+    "genre": "조소",
+    "medium": "테라코타",
+    "year": 2024,
+    "widthCm": 57,
+    "heightCm": 41,
+    "sizeClass": "medium",
+    "price": 2240000,
+    "forRent": true,
+    "rentPricePerMonth": 95000,
+    "paletteName": "선셋 앰버",
+    "colorTag": "warm",
+    "colors": [
+      "#F4A259",
+      "#E76F51",
+      "#F7C59F",
+      "#8C3B2B"
+    ],
+    "composition": "grid",
+    "seed": 2295,
+    "artistNote": "졸업 전시 이후 작업실에 보관하던 작품입니다. 선셋 앰버 계열의 조소 작업으로, 자연광 아래에서 색이 가장 살아납니다.",
+    "tags": [
+      "조소",
+      "warm",
+      "medium"
+    ]
+  },
+  {
+    "id": "art-037",
+    "title": "남겨진 거리 — 연작",
+    "artistId": "artist-01",
+    "genre": "판화",
+    "medium": "목판화",
+    "year": 2023,
+    "widthCm": 90,
+    "heightCm": 80,
+    "sizeClass": "large",
+    "price": 5110000,
+    "forRent": true,
+    "rentPricePerMonth": 201000,
+    "paletteName": "어스 클레이",
+    "colorTag": "earth",
+    "colors": [
+      "#8A5A44",
+      "#A47148",
+      "#D6BFA9",
+      "#5C4433"
+    ],
+    "composition": "fields",
+    "seed": 2332,
+    "artistNote": "졸업 전시 이후 작업실에 보관하던 작품입니다. 어스 클레이 계열의 판화 작업으로, 자연광 아래에서 색이 가장 살아납니다.",
+    "tags": [
+      "판화",
+      "earth",
+      "large"
+    ]
+  },
+  {
+    "id": "art-038",
+    "title": "흐르는 거리 III",
+    "artistId": "artist-02",
+    "genre": "조소",
+    "medium": "레진 혼합",
+    "year": 2024,
+    "widthCm": 44,
+    "heightCm": 48,
+    "sizeClass": "medium",
+    "price": 1980000,
+    "forRent": false,
+    "rentPricePerMonth": 0,
+    "paletteName": "어스 클레이",
+    "colorTag": "earth",
+    "colors": [
+      "#8A5A44",
+      "#A47148",
+      "#D6BFA9",
+      "#5C4433"
+    ],
+    "composition": "shards",
+    "seed": 2369,
+    "artistNote": "손의 흔적과 우연한 번짐을 남겨 둔 작업입니다. 가까이에서 볼수록 질감이 드러납니다.",
+    "tags": [
+      "조소",
+      "earth",
+      "medium"
+    ]
+  },
+  {
+    "id": "art-039",
+    "title": "희미한 언덕 II",
+    "artistId": "artist-03",
+    "genre": "일러스트",
+    "medium": "종이에 색연필",
+    "year": 2024,
+    "widthCm": 88,
+    "heightCm": 65,
+    "sizeClass": "large",
+    "price": 4260000,
+    "forRent": true,
+    "rentPricePerMonth": 179000,
+    "paletteName": "미드나잇 블루",
+    "colorTag": "cool",
+    "colors": [
+      "#22334D",
+      "#3E5C76",
+      "#748CAB",
+      "#0D1B2A"
+    ],
+    "composition": "grid",
+    "seed": 2406,
+    "artistNote": "졸업 전시 이후 작업실에 보관하던 작품입니다. 미드나잇 블루 계열의 일러스트 작업으로, 자연광 아래에서 색이 가장 살아납니다.",
+    "tags": [
+      "일러스트",
+      "cool",
+      "large"
+    ]
+  },
+  {
+    "id": "art-040",
+    "title": "가까운 방 III",
+    "artistId": "artist-04",
+    "genre": "판화",
+    "medium": "실크스크린",
+    "year": 2024,
+    "widthCm": 45,
+    "heightCm": 107,
+    "sizeClass": "large",
+    "price": 3560000,
+    "forRent": false,
+    "rentPricePerMonth": 0,
+    "paletteName": "테라코타",
+    "colorTag": "warm",
+    "colors": [
+      "#C1502E",
+      "#E9C46A",
+      "#D98C5F",
+      "#7A3B2E"
+    ],
+    "composition": "grid",
+    "seed": 2443,
+    "artistNote": "grid 구조를 바탕으로 화면의 균형을 실험했습니다. 카페나 사무실의 넓은 벽면에 잘 어울립니다.",
+    "tags": [
+      "판화",
+      "warm",
+      "large"
+    ]
+  },
+  {
+    "id": "art-041",
+    "title": "가벼운 오후 No.2",
+    "artistId": "artist-05",
+    "genre": "일러스트",
+    "medium": "종이에 수채",
+    "year": 2024,
+    "widthCm": 39,
+    "heightCm": 58,
+    "sizeClass": "medium",
+    "price": 1750000,
+    "forRent": true,
+    "rentPricePerMonth": 57000,
+    "paletteName": "라벤더 미스트",
+    "colorTag": "pastel",
+    "colors": [
+      "#CDB4DB",
+      "#E0C3FC",
+      "#BDB2FF",
+      "#A2A0E8"
+    ],
+    "composition": "fields",
+    "seed": 2480,
+    "artistNote": "손의 흔적과 우연한 번짐을 남겨 둔 작업입니다. 가까이에서 볼수록 질감이 드러납니다.",
+    "tags": [
+      "일러스트",
+      "pastel",
+      "medium"
+    ]
+  },
+  {
+    "id": "art-042",
+    "title": "푸른 빛 II",
+    "artistId": "artist-06",
+    "genre": "회화",
+    "medium": "패널에 유채",
+    "year": 2023,
+    "widthCm": 42,
+    "heightCm": 74,
+    "sizeClass": "medium",
+    "price": 2380000,
+    "forRent": true,
+    "rentPricePerMonth": 93000,
+    "paletteName": "올리브 우드",
+    "colorTag": "earth",
+    "colors": [
+      "#6B705C",
+      "#A5A58D",
+      "#CB997E",
+      "#B7B7A4"
+    ],
+    "composition": "shards",
+    "seed": 2517,
+    "artistNote": "손의 흔적과 우연한 번짐을 남겨 둔 작업입니다. 가까이에서 볼수록 질감이 드러납니다.",
+    "tags": [
+      "회화",
+      "earth",
+      "medium"
+    ]
+  }
+]

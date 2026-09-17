@@ -1,0 +1,13 @@
+# dependencies (this project is dependency-free / no-build)
+node_modules/
+package-lock.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+
+# build output (none — static site served as-is)
+dist/
