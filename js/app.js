@@ -9,6 +9,8 @@ import { recommendForSpace, PURPOSE_PROFILE } from './recommend.js';
 import * as store from './storage.js';
 import * as db from './data.js';
 import { won, esc, h, qs, toast, sizeLabel } from './util.js';
+import { askAI, curatePicks } from '../ai/ai.js';
+import { AI_ENDPOINT } from '../ai/config.js';
 
 const app = qs('#app');
 const GENRE_COLORS = { '회화': '#e76f51', '일러스트': '#8338ec', '판화': '#2a9d8f', '조소': '#c1502e' };
@@ -282,7 +284,13 @@ function spacesView() {
       const card = artCard(art);
       const m = qs('.card-media', card);
       m.append(h('span', { class: 'score', title: '매칭 점수' }, `매칭 ${Math.round(score * 100)}%`));
-      g.append(card);
+      // AI 공간 코디 서술 — narrate why this piece fits the chosen space.
+      const narr = h('div', { class: 'ai-answer ai-narr', 'aria-live': 'polite' });
+      const nbtn = h('button', { class: 'btn ai-btn', type: 'button' }, '✦ AI 공간 코디');
+      nbtn.addEventListener('click', () => runAI('spaceNarrative',
+        { art, space: { ...space }, artists: db.allArtists() },
+        { target: narr, button: nbtn, label: '✦ AI 공간 코디' }));
+      g.append(h('div', { class: 'rec-cell' }, [card, h('div', { class: 'ai-btn-row' }, [nbtn, aiModeBadge()]), narr]));
     });
     out.append(g);
   }
@@ -293,6 +301,95 @@ function spacesView() {
 function numField(label, val, on) {
   const inp = h('input', { type: 'number', min: '10', max: '2000', value: val, class: 'search', oninput: (e) => on(Math.max(0, +e.target.value || 0)) });
   return h('label', { class: 'fld' }, [h('span', {}, label), inp]);
+}
+
+/* ---------- AI: shared helpers ---------- */
+
+// Small pill telling the user which AI provider is active (mock vs. real backend).
+function aiModeBadge() {
+  return h('span', { class: 'ai-mode', title: AI_ENDPOINT ? '실 AI 백엔드 연결됨' : 'DEMO 목업 AI (오프라인)' },
+    AI_ENDPOINT ? 'AI · 실연동' : 'AI · DEMO');
+}
+
+// Render streamed AI text into a target element; toggles a "생성 중" state on the button.
+async function runAI(task, payload, { target, button, label } = {}) {
+  if (button) { button.disabled = true; button.dataset.label = button.textContent; button.textContent = '생성 중…'; }
+  if (target) target.textContent = '';
+  try {
+    await askAI(task, payload, { onToken: (chunk) => { if (target) target.textContent += chunk; } });
+  } catch (e) {
+    if (target) target.textContent = `AI 응답을 불러오지 못했습니다: ${e.message}`;
+    else toast('AI 응답 오류');
+  } finally {
+    if (button) { button.disabled = false; button.textContent = button.dataset.label || label || 'AI 생성'; }
+  }
+}
+
+/* ---------- AI: 작품 큐레이션 챗봇 ---------- */
+
+const aiState = { message: '', budget: 0, wallWidthCm: 0, wallHeightCm: 0, purpose: 'home' };
+
+function aiView() {
+  app.innerHTML = '';
+  app.append(h('section', { class: 'page-head' }, [
+    h('div', { class: 'page-head-row' }, [h('h1', {}, 'AI 작품 큐레이션'), aiModeBadge()]),
+    h('p', {}, '원하는 공간·분위기·예산을 자유롭게 적어주세요. AI 큐레이터가 실제 등록 작품 중에서 어울리는 작품을 추천합니다.')
+  ]));
+
+  const form = h('form', { class: 'space-form', onsubmit: (e) => { e.preventDefault(); ask(); } });
+  const msg = h('textarea', {
+    class: 'search', rows: '3',
+    placeholder: '예) 따뜻한 웜톤의 회화를 카페 벽에 걸고 싶어요. 예산은 50만원 정도예요.',
+    value: aiState.message, oninput: (e) => aiState.message = e.target.value
+  });
+  const purposeSel = h('select', { class: 'sort', onchange: (e) => aiState.purpose = e.target.value });
+  Object.entries(PURPOSE_PROFILE).forEach(([k, v]) => { const o = h('option', { value: k }, v.label); if (k === aiState.purpose) o.selected = true; purposeSel.append(o); });
+
+  form.append(
+    h('label', { class: 'fld' }, [h('span', {}, '무엇을 찾으시나요?'), msg]),
+    h('div', { class: 'two' }, [
+      h('label', { class: 'fld' }, [h('span', {}, '예산 상한 (원, 선택)'),
+        h('input', { type: 'number', min: '0', class: 'search', value: aiState.budget || '', oninput: (e) => aiState.budget = Math.max(0, +e.target.value || 0) })]),
+      h('label', { class: 'fld' }, [h('span', {}, '공간 용도'), purposeSel])
+    ]),
+    h('div', { class: 'two' }, [
+      numField('벽 너비 (cm, 선택)', aiState.wallWidthCm || '', (v) => aiState.wallWidthCm = v),
+      numField('벽 높이 (cm, 선택)', aiState.wallHeightCm || '', (v) => aiState.wallHeightCm = v)
+    ]),
+    h('button', { class: 'btn primary', type: 'submit' }, 'AI 추천 받기')
+  );
+  app.append(form);
+
+  const answer = h('div', { class: 'ai-answer', 'aria-live': 'polite' });
+  const cards = h('div', {});
+  app.append(h('div', { class: 'ai-out' }, [answer, cards]));
+
+  function payload() {
+    return {
+      message: aiState.message, budget: aiState.budget,
+      space: { wallWidthCm: aiState.wallWidthCm, wallHeightCm: aiState.wallHeightCm, purpose: aiState.purpose },
+      artworks: db.allArtworks(), artists: db.allArtists(), n: 4
+    };
+  }
+  async function ask() {
+    if (!aiState.message.trim()) { toast('원하시는 내용을 입력해주세요'); return; }
+    const btn = qs('button[type=submit]', form);
+    cards.innerHTML = '';
+    await runAI('curate', payload(), { target: answer, button: btn });
+    // Show the matching artworks the recommender selected (kept in sync with the AI's prose).
+    const picks = curatePicks(payload());
+    if (picks.length) {
+      cards.append(h('h2', { class: 'section-h' }, `추천 작품 ${picks.length}점`));
+      const g = h('div', { class: 'grid' });
+      picks.forEach(({ art, score }) => {
+        const card = artCard(art);
+        if (score) { const m = qs('.card-media', card); m.append(h('span', { class: 'score', title: '매칭 점수' }, `매칭 ${Math.round(score * 100)}%`)); }
+        g.append(card);
+      });
+      cards.append(g);
+    }
+  }
+  window.scrollTo(0, 0);
 }
 
 /* ---------- consignment submit ---------- */
@@ -372,6 +469,19 @@ function submitView() {
     h('span', {}, '대여 가능')
   ]);
 
+  const noteArea = h('textarea', { class: 'search', rows: '4', oninput: (e) => state.note = e.target.value });
+  const aiNoteBtn = h('button', { type: 'button', class: 'btn ai-btn' }, '✦ AI 작가노트 생성');
+  // Stream the generated note straight into the textarea, keeping state.note in sync.
+  aiNoteBtn.addEventListener('click', async () => {
+    const payload = { title: state.title, genre: state.genre, medium: state.medium, colorTag: state.colorTag, composition, artistName: state.artistName, keywords: state.note };
+    aiNoteBtn.disabled = true; const lbl = aiNoteBtn.textContent; aiNoteBtn.textContent = '생성 중…'; noteArea.value = '';
+    try {
+      await askAI('artistNote', payload, { onToken: (c) => { noteArea.value += c; state.note = noteArea.value; } });
+      state.note = noteArea.value;
+    } catch (e) { toast('AI 응답 오류: ' + e.message); }
+    finally { aiNoteBtn.disabled = false; aiNoteBtn.textContent = lbl; }
+  });
+
   form.append(
     txt('작품 제목', 'title'), txt('작가명', 'artistName'),
     h('label', { class: 'fld' }, [h('span', {}, '장르'), genreSel]),
@@ -381,8 +491,11 @@ function submitView() {
     rentChk, txt('월 대여가(원)', 'rentPricePerMonth', 'number'),
     h('label', { class: 'fld' }, [h('span', {}, '색상 팔레트'), paletteRow]),
     compRow, shuffle,
-    h('label', { class: 'fld' }, [h('span', {}, '작가노트'),
-      h('textarea', { class: 'search', rows: '3', oninput: (e) => state.note = e.target.value })]),
+    h('label', { class: 'fld' }, [
+      h('div', { class: 'fld-head' }, [h('span', {}, '작가노트'), aiModeBadge()]),
+      noteArea,
+      h('div', { class: 'ai-btn-row' }, [aiNoteBtn, h('span', { class: 'dim ai-hint' }, '제목·장르·재료·색감을 채운 뒤 눌러보세요')])
+    ]),
     h('button', { class: 'btn primary', type: 'submit' }, '위탁 등록하기'),
     h('p', { class: 'demo-note' }, 'DEMO 모드 — 등록 정보는 이 브라우저의 localStorage에만 저장됩니다.')
   );
@@ -481,6 +594,7 @@ function router() {
   else if (route === 'art') detailView(param);
   else if (route === 'artist') artistView(param);
   else if (route === 'spaces') spacesView();
+  else if (route === 'ai') aiView();
   else if (route === 'submit') submitView();
   else if (route === 'wishlist') wishlistView();
   else if (route === 'cart') cartView();

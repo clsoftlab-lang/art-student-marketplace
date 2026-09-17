@@ -88,5 +88,34 @@ assert(recommendForSpace(artworks, bigWall, 3).length <= 3, 'recommender respect
 // 5. real seed data yields at least one recommendation for a large cafe wall
 assert(recommendForSpace(artworks, bigWall, 8).length > 0, 'seed data produces recommendations for a large wall');
 
+console.log('\n[6] AI layer syntax (node --check ai/ + server/)');
+for (const dir of ['ai', 'server']) {
+  const abs = join(ROOT, dir);
+  let files = [];
+  try { files = walk(abs); } catch { bad(`${dir}/ directory missing`); continue; }
+  const jsFiles = files.filter((f) => /\.(mjs|js)$/.test(f));
+  assert(jsFiles.length > 0, `${dir}/ has at least one JS module`);
+  for (const f of jsFiles) {
+    try { execFileSync(process.execPath, ['--check', f], { stdio: 'pipe' }); ok(relative(ROOT, f)); }
+    catch (e) { bad(`${relative(ROOT, f)} — ${String(e.stderr || e.message).split('\n')[0]}`); }
+  }
+}
+
+console.log('\n[7] AI safety: endpoint empty in demo + no real key in repo');
+const aiConfig = readFileSync(join(ROOT, 'ai/config.js'), 'utf8');
+// AI_ENDPOINT must ship empty so the repo defaults to the offline mock (no accidental live calls).
+assert(/AI_ENDPOINT\s*=\s*(""|'')\s*;/.test(aiConfig), 'ai/config.js ships AI_ENDPOINT = "" (demo/mock default)');
+// Scan every tracked text file for anything shaped like a real Anthropic API key.
+const KEY_RE = new RegExp('sk-' + 'ant-[A-Za-z0-9_-]{20,}');
+let leaked = 0;
+for (const f of walk(ROOT)) {
+  if (!/\.(mjs|js|json|md|html|css|txt|env|yml|yaml|example)$/i.test(f) && !/\.env/.test(f)) continue;
+  if (relative(ROOT, f) === relative(ROOT, fileURLToPath(import.meta.url))) continue; // skip this checker (holds the pattern)
+  let text;
+  try { text = readFileSync(f, 'utf8'); } catch { continue; }
+  if (KEY_RE.test(text)) { bad(`possible real API key found in ${relative(ROOT, f)}`); leaked++; }
+}
+assert(leaked === 0, 'no real Anthropic API key committed anywhere in the repo');
+
 console.log(`\n${failures === 0 ? 'PASS' : 'FAILED'} — ${failures} failure(s)\n`);
 process.exit(failures === 0 ? 0 : 1);

@@ -2,6 +2,12 @@
 node_modules/
 package-lock.json
 
+# secrets — the Anthropic API key lives only in server/.env (never committed)
+.env
+*.env
+!.env.example
+server/.env
+
 # OS / editor
 .DS_Store
 Thumbs.db

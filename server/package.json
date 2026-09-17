@@ -1,0 +1,19 @@
+{
+  "name": "again-art-ai-proxy",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Backend proxy for the Again Art (어게인 아트) AI layer — holds the Anthropic API key server-side and streams Claude responses to the browser.",
+  "license": "Apache-2.0",
+  "author": "CLSOFTLAB (씨엘소프트랩), Dr. Lee Il-guk (이일국)",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node index.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.68.0"
+  }
+}

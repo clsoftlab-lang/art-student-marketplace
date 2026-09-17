@@ -56,6 +56,42 @@
 `recommendForSpace()`는 맞지 않는 작품을 제외하고 점수순 정렬 후 개수를 제한합니다. 이
 함수들은 `check.mjs`의 **CI 단위 테스트**로 검증됩니다.
 
+## 🤖 AI 기능 (API 연동)
+
+**교체 가능한 AI 레이어**를 탑재했으며, 세 가지 기능이 모두 UI에 연결되어 있습니다:
+
+1. **AI 작품 큐레이션 챗봇** (`#/ai`) — 공간·취향·예산을 자유롭게 적으면, AI 큐레이터가 실제
+   등록 작품 중에서 어울리는 작품을 (공간 매칭 추천기로 순위를 매겨) 추천합니다.
+2. **작가노트 / 작품 설명 생성** (`#/submit`) — 제목·장르·재료·색감·구성으로부터 작가노트 초안을
+   한 번에 생성합니다.
+3. **공간 코디 추천 서술** (`#/spaces`) — 추천 작품마다 카페/사무실/가정에 왜 어울리는지 서술합니다.
+
+**데모 = 목업(기본값).** `ai/config.js`의 `AI_ENDPOINT`가 비어 있으면 결정론적 한국어
+**MockProvider**가 완전히 오프라인으로(네트워크·키 없이) 답합니다. 앱의 실제 작품·작가 데이터와
+추천기를 재사용하므로, 별도 설정 없이도 기능이 눈으로 바로 동작합니다.
+
+**실제 Claude 연동.** 백엔드 프록시를 실행한 뒤 앱이 그곳을 바라보게 합니다:
+
+```bash
+cd server && npm install          # @anthropic-ai/sdk 설치
+cp .env.example .env              # 이후 ANTHROPIC_API_KEY=sk-ant-... 설정
+npm start                         # → http://localhost:8787
+```
+
+그다음 `ai/config.js`에 엔드포인트를 지정합니다:
+
+```js
+export const AI_ENDPOINT = "http://localhost:8787/api/ai";
+```
+
+프록시는 Claude(모델 `claude-opus-5`, adaptive thinking)를 호출하고 응답을 브라우저로
+**스트리밍**합니다. 자세한 내용은 [`server/README.md`](./server/README.md) 참고.
+
+> **🔐 키는 서버에만 둡니다.** `ANTHROPIC_API_KEY`는 **오직 서버**(`server/.env` →
+> `process.env.ANTHROPIC_API_KEY`)에만 존재합니다. 브라우저·`ai/config.js`·저장소 어디에도
+> **절대 두지 않습니다.** `.env`는 gitignore되어 있고, 실제 키 형식이 커밋되면 `check.mjs`가
+> 빌드를 실패시킵니다.
+
 ## 로컬 실행
 
 설치·빌드 불필요. ES 모듈은 `file://`이 아닌 `http://`가 필요하므로 HTTP로 제공하세요:
@@ -74,7 +110,9 @@ node check.mjs
 ```
 
 모든 JSON 파싱, 전 JS `node --check`, `index.html` 필수 컨테이너, 시드 데이터 정합성(전
-장르 36점 이상), 공간 매칭 추천기 동작을 확인합니다. CI가 실행하는 것과 동일합니다.
+장르 36점 이상), 공간 매칭 추천기 동작에 더해 `ai/`·`server/` 모듈 문법 검사, `AI_ENDPOINT`
+공백 여부, **실제 API 키 커밋 여부**를 확인합니다. CI가 실행하는 것과 동일하며, CI는 AI
+백엔드를 설치·호출하지 않습니다.
 
 ## 기술 & 구조
 
@@ -89,9 +127,13 @@ js/recommend.js       순수 공간 매칭 추천기(단위 테스트)
 js/data.js            JSON 로딩 + 필터/정렬 + 위탁작 병합
 js/storage.js         localStorage 래퍼(try/catch + 초기화)
 js/util.js            포맷팅 + DOM 헬퍼
+ai/config.js          AI_ENDPOINT 스위치(비어 있으면 오프라인 목업)
+ai/ai.js              askAI() — 목업 제공자 + 스트리밍 백엔드 클라이언트
+server/index.mjs      백엔드 프록시(@anthropic-ai/sdk, 키는 서버에만)
+server/.env.example   ANTHROPIC_API_KEY 템플릿(.env로 복사)
 data/artworks.json    가상 작품 42점
 data/artists.json     가상 작가 12명
-check.mjs             CI 검증기 + 추천기 단위 테스트
+check.mjs             CI 검증기 + 추천기 단위 테스트 + AI 키 유출 검사
 ```
 
 ## 기여자

@@ -59,6 +59,43 @@ for a space:
 `recommendForSpace()` drops non-fitting works, sorts by score, and caps the list. These
 functions are **unit-tested in CI** by `check.mjs`.
 
+## 🤖 AI 기능 (API 연동) — AI features
+
+The app ships a **pluggable AI layer** with three features, all wired into the UI:
+
+1. **AI 작품 큐레이션 챗봇** (`#/ai`) — describe your space, taste, and budget in free text; the
+   AI curator recommends real registered artworks (ranked with the space-match recommender).
+2. **작가노트 / 작품 설명 생성** (`#/submit`) — one click drafts an artist's note from the piece's
+   title, genre, medium, palette, and composition.
+3. **공간 코디 추천 서술** (`#/spaces`) — for each recommendation, narrate *why* the piece fits a
+   café / office / home.
+
+**Demo = mock (default).** With `AI_ENDPOINT` empty in `ai/config.js`, a deterministic Korean
+**MockProvider** answers entirely offline — no network, no key — reusing the app's own
+artworks/artists data and the recommender, so the features visibly work out of the box.
+
+**Enable real Claude.** Run the backend proxy and point the app at it:
+
+```bash
+cd server && npm install          # installs @anthropic-ai/sdk
+cp .env.example .env              # then set ANTHROPIC_API_KEY=sk-ant-...
+npm start                         # → http://localhost:8787
+```
+
+Then set the endpoint in `ai/config.js`:
+
+```js
+export const AI_ENDPOINT = "http://localhost:8787/api/ai";
+```
+
+The proxy calls Claude (model `claude-opus-5`, adaptive thinking) and **streams** the response
+back to the browser. See [`server/README.md`](./server/README.md) for details.
+
+> **🔐 Keys are server-side only.** The `ANTHROPIC_API_KEY` lives **only** on the server
+> (`server/.env` → `process.env.ANTHROPIC_API_KEY`). It is **never** placed in the browser,
+> in `ai/config.js`, or anywhere in the repository. `.env` is gitignored, and `check.mjs`
+> fails the build if anything shaped like a real key is ever committed.
+
 ## Run locally
 
 No install, no build. Serve the folder over HTTP (ES modules require `http://`, not `file://`):
@@ -77,8 +114,10 @@ node check.mjs
 ```
 
 Checks that all JSON parses, every JS file passes `node --check`, `index.html` has its
-required containers, the seed data is well-formed (36+ works across all genres), and the
-space-match recommender behaves correctly. This is the same job the CI workflow runs.
+required containers, the seed data is well-formed (36+ works across all genres), the
+space-match recommender behaves correctly, the `ai/` and `server/` modules syntax-check,
+`AI_ENDPOINT` ships empty, and **no real API key is committed anywhere**. This is the same
+job the CI workflow runs. (CI never installs or calls the AI backend.)
 
 ## Tech & structure
 
@@ -93,9 +132,13 @@ js/recommend.js       pure space-match recommender (unit-tested)
 js/data.js            JSON loading + filter/sort + submissions merge
 js/storage.js         localStorage wrapper (try/catch + reset)
 js/util.js            formatting + DOM helpers
+ai/config.js          AI_ENDPOINT switch (empty = offline mock)
+ai/ai.js              askAI() — mock provider + streaming backend client
+server/index.mjs      backend proxy (@anthropic-ai/sdk, key server-side)
+server/.env.example   ANTHROPIC_API_KEY template (copy to .env)
 data/artworks.json    42 fictional artworks
 data/artists.json     12 fictional artists
-check.mjs             CI validator + recommender unit tests
+check.mjs             CI validator + recommender unit tests + AI safety scan
 ```
 
 ## Contributors
