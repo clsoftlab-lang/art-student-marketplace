@@ -84,13 +84,47 @@ npm start                         # → http://localhost:8787
 export const AI_ENDPOINT = "http://localhost:8787/api/ai";
 ```
 
-프록시는 Claude(모델 `claude-opus-5`, adaptive thinking)를 호출하고 응답을 브라우저로
-**스트리밍**합니다. 자세한 내용은 [`server/README.md`](./server/README.md) 참고.
+프록시는 Claude(비용 우선 기본값 `claude-haiku-4-5`, 설정 가능)를 호출하고 응답을 브라우저로
+**스트리밍**합니다. 자세한 내용은 [`server/README.md`](./server/README.md), 비용 모델과 무료
+서버리스 배포는 아래 **고도화** 섹션을 참고하세요.
 
 > **🔐 키는 서버에만 둡니다.** `ANTHROPIC_API_KEY`는 **오직 서버**(`server/.env` →
 > `process.env.ANTHROPIC_API_KEY`)에만 존재합니다. 브라우저·`ai/config.js`·저장소 어디에도
 > **절대 두지 않습니다.** `.env`는 gitignore되어 있고, 실제 키 형식이 커밋되면 `check.mjs`가
 > 빌드를 실패시킵니다.
+
+## ⚙️ 고도화 — 무인·저비용 실 AI 연동
+
+AI 레이어는 실 Claude를 기본으로 쓰되 **무인으로, 저비용으로** 돌아가고 절대 끊기지 않도록
+튜닝했습니다:
+
+- **비용 우선 모델.** 기본값 `claude-haiku-4-5` — **$1 / $5 per MTok**(입력/출력). 품질이 더
+  필요할 때만 `AI_MODEL`로 `claude-sonnet-5`·`claude-opus-5`로 올립니다.
+- **프롬프트 캐싱.** 태스크별 고정 시스템 프롬프트를 캐시 블록(`cache_control: ephemeral`)으로
+  보내, 반복 호출 시 캐시를 읽어 비용이 줄어듭니다.
+- **출력 상한.** 태스크별 소박한 `max_tokens`(기본 ~700, 큐레이션만 ~1000).
+- **비용 가드레일.** IP당 요청 제한(20/분)과 월간 토큰 예산(`AI_MONTHLY_TOKEN_CAP`, 기본
+  2,000,000 토큰) 초과 시 HTTP 429 `{fallback:true}`를 반환합니다.
+- **무인 목업 폴백.** 엔드포인트가 429/`{fallback:true}`·오류·연결 불가일 때 `ai/ai.js`가
+  **오프라인 목업으로 자동 폴백**합니다 — 키·서버 없이도 앱이 계속 동작합니다.
+
+**대략적 비용.** Haiku 4.5 + 프롬프트 캐싱 + ~700 토큰 출력 상한이면 큐레이션 요청 1건이
+수천 토큰 수준이라, **약 1,000건이 미화 한 자릿수 달러대**에 들어옵니다. Sonnet/Opus는 토큰당
+비용이 높으니 품질이 필요한 곳에만 씁니다.
+
+**무료 원클릭 배포(무인).** `server/worker.js` + `server/wrangler.toml`로 동일한 프록시를
+**Cloudflare Workers**(무료 티어, 관리할 서버 없음)에 배포합니다:
+
+```bash
+cd server
+npx wrangler deploy
+npx wrangler secret put ANTHROPIC_API_KEY   # 키는 Worker 시크릿으로 저장
+```
+
+**자율 온로드 기능.** 갤러리 홈에 공간 매칭 추천기 + `askAI` 서술로 자동 생성되는
+**"오늘의 공간 맞춤 추천 작품"** 다이제스트가 표시됩니다 — 오프라인 목업으로도 동작합니다.
+
+> **🔐 API 키는 서버에만 — 브라우저나 저장소에는 절대 두지 않습니다.**
 
 ## 로컬 실행
 
@@ -129,7 +163,9 @@ js/storage.js         localStorage 래퍼(try/catch + 초기화)
 js/util.js            포맷팅 + DOM 헬퍼
 ai/config.js          AI_ENDPOINT 스위치(비어 있으면 오프라인 목업)
 ai/ai.js              askAI() — 목업 제공자 + 스트리밍 백엔드 클라이언트
-server/index.mjs      백엔드 프록시(@anthropic-ai/sdk, 키는 서버에만)
+server/index.mjs      백엔드 프록시(@anthropic-ai/sdk, 키는 서버에만, 캐싱+가드레일)
+server/worker.js      Cloudflare Workers 변형(무의존성, 무료 서버리스 배포)
+server/wrangler.toml  Workers 설정(키는 Worker 시크릿, 파일에 없음)
 server/.env.example   ANTHROPIC_API_KEY 템플릿(.env로 복사)
 data/artworks.json    가상 작품 42점
 data/artists.json     가상 작가 12명

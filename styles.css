@@ -219,6 +219,17 @@ body.drawer-open .scrim { opacity: 1; pointer-events: auto; }
 .rec-cell { break-inside: avoid; margin-bottom: 16px; }
 .rec-cell .card { margin-bottom: 0; }
 
+/* ---- autonomous on-load digest (오늘의 공간 맞춤 추천 작품) ---- */
+.home-digest { margin: 18px 4px 8px; padding: 16px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface-2); }
+.home-digest-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+.home-digest-head h2 { margin: 0; font-size: 1.1rem; }
+.home-digest-body { display: grid; gap: 14px; }
+.home-digest-pick .card { margin-bottom: 0; }
+.home-digest .ai-answer { margin: 0; }
+@media (min-width: 640px) {
+  .home-digest-body { grid-template-columns: 200px 1fr; align-items: start; }
+}
+
 /* ---- responsive ---- */
 @media (min-width: 640px) {
   .grid { column-count: 2; }

@@ -31,12 +31,21 @@ const COLOR_LABEL = {
 
 // Ask the AI. Returns a Promise<string> of the full text; if `onToken` is given it is
 // invoked with each streamed chunk as it arrives (both in mock and real mode).
+//
+// 무인(autonomous): when a real endpoint is configured but the call fails, returns HTTP 429
+// {fallback:true} (rate limit / token budget / no key), or the network is unreachable, we
+// AUTO-FALL BACK to the offline mock so the app never breaks. The fallback is detected before
+// any token is emitted, so onToken output is never mixed between providers.
 export async function askAI(task, payload = {}, { onToken } = {}) {
   if (!AI_ENDPOINT) {
-    const text = mockAnswer(task, payload);
-    return streamOut(text, onToken);
+    return streamOut(mockAnswer(task, payload), onToken);
   }
-  return fetchStream(task, payload, onToken);
+  try {
+    return await fetchStream(task, payload, onToken);
+  } catch {
+    // Real AI unavailable → keep running on the deterministic mock.
+    return streamOut(mockAnswer(task, payload), onToken);
+  }
 }
 
 // Deterministically select artworks for a curation request, reusing the recommender.
@@ -103,6 +112,7 @@ function mockAnswer(task, payload) {
     case 'curate': return mockCurate(payload);
     case 'artistNote': return mockArtistNote(payload);
     case 'spaceNarrative': return mockSpaceNarrative(payload);
+    case 'spaceDigest': return mockSpaceDigest(payload);
     default: return 'DEMO 모드: 지원하지 않는 AI 작업입니다.';
   }
 }
@@ -203,6 +213,29 @@ function mockSpaceNarrative(payload) {
       : '매일 지나치는 거실 벽에서, 계절과 빛에 따라 조금씩 다르게 읽히며 일상에 리듬을 만듭니다.';
 
   return [p1, p2, p3].join('\n\n');
+}
+
+// Autonomous on-load digest — a short "오늘의 공간 맞춤 추천 작품" summary built from the
+// picks the space-match recommender already selected (payload.picks). Grounded + offline.
+function mockSpaceDigest(payload) {
+  const picks = Array.isArray(payload.picks) ? payload.picks : [];
+  const space = payload.space || {};
+  const purposeLabel = PURPOSE_LABEL[space.purpose] || '공간';
+  if (!picks.length) {
+    return `오늘의 ${purposeLabel} 맞춤 추천을 준비하지 못했어요. 갤러리를 둘러보거나 공간 맞춤 추천에서 벽 크기를 입력해보세요.`;
+  }
+  const top = picks[0];
+  const art = top.art || top;
+  const artistName = artistNameOf(art, payload.artists);
+  const colorLabel = COLOR_LABEL[art.colorTag] || art.colorTag || '';
+  const pct = top.score ? ` (매칭 ${Math.round(top.score * 100)}%)` : '';
+  const p1 = `오늘의 ${purposeLabel} 맞춤 추천으로 「${art.title}」 · ${artistName}을(를) 골랐어요${pct}. ` +
+    `${colorLabel ? `${colorLabel} 색감의 ` : ''}${art.widthCm}×${art.heightCm}cm 작품이라 이 공간의 벽에 부담 없이 어울립니다.`;
+  const rest = picks.slice(1, 3).map(({ art: a }) => `「${a.title}」`).filter(Boolean);
+  const p2 = rest.length
+    ? `${rest.join(' · ')}도 함께 추천해요. 마음에 드는 작품을 눌러 살펴보세요. (DEMO — 실제 결제는 없습니다.)`
+    : '작품을 눌러 상세 페이지에서 살펴보세요. (DEMO — 실제 결제는 없습니다.)';
+  return [p1, p2].join('\n\n');
 }
 
 /* ------------------------------------------------------------------ *

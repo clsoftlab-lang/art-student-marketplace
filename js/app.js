@@ -74,6 +74,7 @@ function galleryView() {
     h('h1', {}, '버려질 뻔한 졸업 작품에, 두 번째 벽을'),
     h('p', {}, '전시가 끝나면 창고로 사라지던 미술대학생들의 작품을 갤러리·카페·사무실·개인에게 다시 잇습니다.')
   ]);
+  const digest = autoDigest();
 
   const controls = h('div', { class: 'controls' });
   const search = h('input', {
@@ -126,7 +127,7 @@ function galleryView() {
 
   const grid = h('div', { class: 'grid', id: 'grid' });
   const count = h('div', { class: 'result-count', id: 'result-count' });
-  app.append(hero, controls, count, grid);
+  app.append(hero, digest, controls, count, grid);
 
   function renderGrid() {
     const list = db.queryArtworks(filters);
@@ -136,6 +137,45 @@ function galleryView() {
     list.forEach((a) => grid.append(artCard(a)));
   }
   renderGrid();
+}
+
+/* ---------- autonomous on-load feature: 오늘의 공간 맞춤 추천 작품 ---------- */
+// Self-running digest generated once per session from the space-match recommender + askAI
+// narration (works offline via the mock). Runs unattended (무인), unobtrusive + accessible.
+const homeDigest = { started: false, text: '', pick: null, narr: null };
+const DIGEST_SPACE = { wallWidthCm: 200, wallHeightCm: 150, colorTag: '', purpose: 'cafe' };
+
+function autoDigest() {
+  const arts = db.allArtworks();
+  const recs = arts.length ? recommendForSpace(arts, DIGEST_SPACE, 3) : [];
+  if (!recs.length) return h('div', { hidden: true }); // nothing to show → stay silent
+  homeDigest.pick = recs[0];
+
+  const card = artCard(recs[0].art);
+  const media = qs('.card-media', card);
+  if (media) media.append(h('span', { class: 'score', title: '매칭 점수' }, `매칭 ${Math.round(recs[0].score * 100)}%`));
+
+  const narr = h('div', { class: 'ai-answer ai-narr', 'aria-live': 'polite' });
+  homeDigest.narr = narr;
+  if (homeDigest.text) narr.textContent = homeDigest.text; // re-render: show cached/partial text
+
+  const section = h('section', { class: 'home-digest', 'aria-label': '오늘의 공간 맞춤 추천 작품' }, [
+    h('div', { class: 'home-digest-head' }, [h('h2', {}, '✦ 오늘의 공간 맞춤 추천 작품'), aiModeBadge()]),
+    h('div', { class: 'home-digest-body' }, [h('div', { class: 'home-digest-pick' }, [card]), narr])
+  ]);
+
+  if (!homeDigest.started) {
+    homeDigest.started = true;
+    const payload = {
+      space: { ...DIGEST_SPACE },
+      picks: recs.map(({ art, score }) => ({ art, score })),
+      artists: db.allArtists()
+    };
+    askAI('spaceDigest', payload, {
+      onToken: (chunk) => { homeDigest.text += chunk; if (homeDigest.narr) homeDigest.narr.textContent = homeDigest.text; }
+    }).catch(() => { /* autonomous: never breaks the page */ });
+  }
+  return section;
 }
 
 /* ---------- detail ---------- */

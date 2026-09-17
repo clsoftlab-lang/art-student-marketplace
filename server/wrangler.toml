@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 CLSOFTLAB (씨엘소프트랩), Dr. Lee Il-guk (이일국)
+#
+# Cloudflare Workers config for the Again Art AI proxy (server/worker.js).
+# Free tier = no server to babysit (무인). The API key is a Worker SECRET, never in this file:
+#   npx wrangler secret put ANTHROPIC_API_KEY
+#
+# Optional non-secret vars (cost tuning) can be set below or via the dashboard.
+
+name = "again-art-ai"
+main = "worker.js"
+compatibility_date = "2026-01-01"
+
+[vars]
+# Cost-first default. Raise to "claude-sonnet-5" or "claude-opus-5" for higher quality.
+AI_MODEL = "claude-haiku-4-5"
+# Effort for Sonnet/Opus only (ignored on Haiku). "low" keeps cost down.
+AI_EFFORT = "low"
+
+# ANTHROPIC_API_KEY is intentionally NOT here — set it as a secret:
+#   npx wrangler secret put ANTHROPIC_API_KEY

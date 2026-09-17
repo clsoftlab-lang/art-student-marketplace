@@ -88,13 +88,51 @@ Then set the endpoint in `ai/config.js`:
 export const AI_ENDPOINT = "http://localhost:8787/api/ai";
 ```
 
-The proxy calls Claude (model `claude-opus-5`, adaptive thinking) and **streams** the response
-back to the browser. See [`server/README.md`](./server/README.md) for details.
+The proxy calls Claude (cost-first default `claude-haiku-4-5`, configurable) and **streams**
+the response back to the browser. See [`server/README.md`](./server/README.md) for details,
+and the **고도화** section below for the cost model and the free serverless deploy.
 
 > **🔐 Keys are server-side only.** The `ANTHROPIC_API_KEY` lives **only** on the server
 > (`server/.env` → `process.env.ANTHROPIC_API_KEY`). It is **never** placed in the browser,
 > in `ai/config.js`, or anywhere in the repository. `.env` is gitignored, and `check.mjs`
 > fails the build if anything shaped like a real key is ever committed.
+
+## ⚙️ 고도화 — 무인·저비용 실 AI 연동
+
+The AI layer is tuned to run **unmanned (무인) and cheaply**, defaulting to real Claude while
+never breaking:
+
+- **Cost-first model.** Default `claude-haiku-4-5` at **$1 / $5 per MTok** (input/output).
+  Raise via `AI_MODEL` to `claude-sonnet-5` or `claude-opus-5` only when you want more quality.
+- **Prompt caching.** The stable per-task system prompt is sent as a cached block
+  (`cache_control: ephemeral`), so repeated calls read the cache and pay less.
+- **Output caps.** Modest per-task `max_tokens` (~700 default; ~1000 only for curation).
+- **Cost guardrails.** A per-IP rate limit (20/min) and a monthly token budget
+  (`AI_MONTHLY_TOKEN_CAP`, default 2,000,000 tokens) return HTTP 429 `{fallback:true}` when
+  exceeded.
+- **Autonomous mock-fallback (무인).** When the endpoint returns 429/`{fallback:true}`, errors,
+  or is unreachable, `ai/ai.js` **auto-falls back to the offline mock** — the app keeps working
+  with no key and no server.
+
+**Rough cost estimate.** With Haiku 4.5, prompt caching, and the ~700-token output cap, a
+typical curation request is on the order of a few thousand tokens end-to-end; **~1,000
+requests land in the low single-digit US dollars**. Sonnet/Opus cost more per token — switch
+only where the quality is worth it.
+
+**Free one-deploy (무인).** `server/worker.js` + `server/wrangler.toml` deploy the same proxy to
+**Cloudflare Workers** (free tier, no server to babysit):
+
+```bash
+cd server
+npx wrangler deploy
+npx wrangler secret put ANTHROPIC_API_KEY   # key stored as a Worker secret
+```
+
+**Autonomous on-load feature.** The gallery home shows an auto-generated **"오늘의 공간 맞춤 추천
+작품"** digest — built from the space-match recommender and narrated via `askAI` — so it works
+even offline through the mock.
+
+> **🔐 API keys are server-side only — never in the browser or repo.**
 
 ## Run locally
 
@@ -134,7 +172,9 @@ js/storage.js         localStorage wrapper (try/catch + reset)
 js/util.js            formatting + DOM helpers
 ai/config.js          AI_ENDPOINT switch (empty = offline mock)
 ai/ai.js              askAI() — mock provider + streaming backend client
-server/index.mjs      backend proxy (@anthropic-ai/sdk, key server-side)
+server/index.mjs      backend proxy (@anthropic-ai/sdk, key server-side, caching + guardrails)
+server/worker.js      Cloudflare Workers variant (zero-dep, free serverless deploy)
+server/wrangler.toml  Workers config (key = Worker secret, not in the file)
 server/.env.example   ANTHROPIC_API_KEY template (copy to .env)
 data/artworks.json    42 fictional artworks
 data/artists.json     12 fictional artists
